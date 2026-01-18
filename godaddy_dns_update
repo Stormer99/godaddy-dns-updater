@@ -101,9 +101,9 @@ monitor_and_update_domain(){
         if [[ "${subdomain}" == '@' ]]; then
           domain_to_update='@'
         fi
-        domain_ip="$(curl -s -X GET -H "Authorization: sso-key ${api_auth_string}" "https://api.godaddy.com/v1/domains/${domain}/records/A/${domain_to_update}"|awk -F'"' '{print $4}')"
+        domain_ip="$(curl -s -X GET -H "Authorization: sso-key ${api_auth_string}" "https://api.ote-godaddy.com/v1/domains/${domain}/records/A/${domain_to_update}"|awk -F'"' '{print $4}')"
         if [[ "${domain_ip}" != "${external_ip}" ]]; then
-          update_status=$(curl -o /dev/null -w "%{http_code}\n" -s -X PUT "https://api.godaddy.com/v1/domains/${domain}/records/A/${domain_to_update}" -H "Authorization: sso-key ${api_auth_string}" -H "Content-Type: application/json" -d "[{\"data\": \"${external_ip}\"}]")
+          update_status=$(curl -o /dev/null -w "%{http_code}\n" -s -X PUT "https://api.ote-godaddy.com/v1/domains/${domain}/records/A/${domain_to_update}" -H "Authorization: sso-key ${api_auth_string}" -H "Content-Type: application/json" -d "[{\"data\": \"${external_ip}\"}]")
           if [[ ${update_status} -eq 200 ]]; then
             logger "Changed IP on ${domain_name} from ${domain_ip} to ${external_ip}"
           else
