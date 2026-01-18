@@ -1,6 +1,7 @@
 name: buildx
 
 on:
+  workflow_run:
   schedule:
     - cron: '20 0 * * *'
   pull_request:
@@ -21,7 +22,7 @@ jobs:
         name: Prepare
         id: prepare
         run: |
-          DOCKER_IMAGE=parkerhemphill/godaddy-dns-updater
+          DOCKER_IMAGE=stormer99/godaddy-dns-updater
           DOCKER_PLATFORMS=linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
           VERSION=latest
 
