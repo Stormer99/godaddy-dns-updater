@@ -1,7 +1,6 @@
 name: buildx
 
 on:
-  workflow_run:
   schedule:
     - cron: '20 0 * * *'
   pull_request:
